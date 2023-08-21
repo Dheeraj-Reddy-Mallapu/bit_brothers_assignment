@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Credit Cards Project',
+      title: 'Bit Brothers Assignment by Dheeraj',
       theme: ThemeData(fontFamily: 'Lato'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(

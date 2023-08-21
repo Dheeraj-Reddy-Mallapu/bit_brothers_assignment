@@ -9,9 +9,7 @@ class CreditCardsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildTitleSection(
-                title: "Payment Details",
-                subTitle: "How would you like to pay ?"),
+            _buildTitleSection(title: "Payment Details", subTitle: "How would you like to pay ?"),
             _buildCreditCard(
                 color: Color(0xFF090943),
                 cardExpiration: "08/2022",
@@ -60,10 +58,7 @@ class CreditCardsPage extends StatelessWidget {
 
   // Build the credit card widget
   Card _buildCreditCard(
-      {@required Color color,
-      @required String cardNumber,
-      @required String cardHolder,
-      @required String cardExpiration}) {
+      {required Color color, required String cardNumber, required String cardHolder, required String cardExpiration}) {
     return Card(
       elevation: 4.0,
       color: color,
@@ -82,10 +77,7 @@ class CreditCardsPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16.0),
               child: Text(
                 '$cardNumber',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21,
-                    fontFamily: 'CourrierPrime'),
+                style: TextStyle(color: Colors.white, fontSize: 21, fontFamily: 'CourrierPrime'),
               ),
             ),
             Row(
@@ -124,19 +116,17 @@ class CreditCardsPage extends StatelessWidget {
   }
 
 // Build Column containing the cardholder and expiration information
-  Column _buildDetailsBlock({@required String label, @required String value}) {
+  Column _buildDetailsBlock({required String label, required String value}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           '$label',
-          style: TextStyle(
-              color: Colors.grey, fontSize: 9, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.grey, fontSize: 9, fontWeight: FontWeight.bold),
         ),
         Text(
           '$value',
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         )
       ],
     );
@@ -144,8 +134,8 @@ class CreditCardsPage extends StatelessWidget {
 
 // Build the FloatingActionButton
   Container _buildAddCardButton({
-    @required Icon icon,
-    @required Color color,
+    required Icon icon,
+    required Color color,
   }) {
     return Container(
       margin: const EdgeInsets.only(top: 24.0),
