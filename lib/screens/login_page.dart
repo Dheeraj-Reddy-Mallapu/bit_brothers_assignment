@@ -151,10 +151,15 @@ class _LoginPageState extends State<LoginPage> {
                     )),
                   ),
                   onTap: () async {
-                    // print('email: $email, password: $password');
-                    String token = await LoginApiService().performLogin(email, password);
-                    if (token != "") {
-                      Get.offAll(() => CreditCardsPage());
+                    if (email.isNotEmpty && password.length > 7) {
+                      String token = await LoginApiService().performLogin(email, password);
+                      if (token != "") {
+                        Get.offAll(() => CreditCardsPage());
+                      } else {
+                        Get.snackbar('Oops!', 'Something went wrong');
+                      }
+                    } else {
+                      Get.snackbar('Please enter all fields', 'Password must be 8+ characters');
                     }
                   },
                 ),

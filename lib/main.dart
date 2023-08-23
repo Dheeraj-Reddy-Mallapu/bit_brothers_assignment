@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isLoading = true;
+  bool isLoading = true; // to wait till the token is loaded
   bool isUserLoggedIn = false;
 
   loadToken() async {

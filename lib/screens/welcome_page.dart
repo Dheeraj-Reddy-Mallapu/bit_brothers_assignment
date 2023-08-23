@@ -25,17 +25,17 @@ class WelcomePage extends StatelessWidget {
         Image.asset(
           'assets/images/slide_1.png',
           width: MediaQuery.of(context).size.width,
-          height: 500,
+          height: 600,
         ),
         Image.asset(
           'assets/images/slide_2.png',
           width: MediaQuery.of(context).size.width,
-          height: 500,
+          height: 600,
         ),
         Image.asset(
           'assets/images/slide_3.png',
           width: MediaQuery.of(context).size.width,
-          height: 500,
+          height: 600,
         ),
       ],
       totalPage: 3,
@@ -54,7 +54,7 @@ class WelcomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 500,
+            height: 600,
           ),
           Text(
             text,

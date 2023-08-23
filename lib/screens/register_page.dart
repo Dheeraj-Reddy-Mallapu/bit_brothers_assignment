@@ -199,9 +199,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     )),
                   ),
                   onTap: () async {
-                    String token = await RegisterApiService().performRegistration(name, email, password);
-                    if (token != "") {
-                      Get.offAll(() => CreditCardsPage());
+                    if (name.isNotEmpty && email.isNotEmpty && password.length > 7) {
+                      String token = await RegisterApiService().performRegistration(name, email, password);
+                      if (token != "") {
+                        Get.offAll(() => CreditCardsPage());
+                      } else {
+                        Get.snackbar('Oops!', 'Something went wrong');
+                      }
+                    } else {
+                      Get.snackbar('Please enter all fields', 'Password must be 8+ characters');
                     }
                   },
                 ),
