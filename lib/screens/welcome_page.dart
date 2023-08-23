@@ -1,4 +1,5 @@
-import 'package:bitbrothers_assignment/screens/credit_cards_page.dart';
+import 'package:bitbrothers_assignment/screens/login_page.dart';
+import 'package:bitbrothers_assignment/screens/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:get/get.dart';
@@ -16,11 +17,10 @@ class WelcomePage extends StatelessWidget {
       finishButtonStyle: FinishButtonStyle(
         backgroundColor: Colors.black,
       ),
+      onFinish: () => Get.offAll(() => RegisterPage()),
       skipTextButton: Text('Skip'),
       trailing: Text('Login'),
-      trailingFunction: () {
-        Get.to(() => CreditCardsPage());
-      },
+      trailingFunction: () => Get.offAll(() => LoginPage()),
       background: [
         Image.asset(
           'assets/images/slide_1.png',

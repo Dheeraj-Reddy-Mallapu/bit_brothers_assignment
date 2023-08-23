@@ -1,3 +1,5 @@
+import 'package:bitbrothers_assignment/data/shared_preferences.dart';
+import 'package:bitbrothers_assignment/screens/credit_cards_page.dart';
 import 'package:bitbrothers_assignment/screens/welcome_page.dart';
 import 'package:get/get.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -5,7 +7,35 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLoading = true;
+  bool isUserLoggedIn = false;
+
+  loadToken() async {
+    String token = await SharedPrefs().getToken();
+    // print(token);
+    if (token != '') {
+      isLoading = false;
+      isUserLoggedIn = true;
+      setState(() {});
+    } else {
+      isLoading = false;
+      isUserLoggedIn = false;
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    loadToken();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
@@ -23,7 +53,11 @@ class MyApp extends StatelessWidget {
             ),
             title: 'Bit Brothers Assignment by Dheeraj',
             debugShowCheckedModeBanner: false,
-            home: WelcomePage());
+            home: isLoading
+                ? Center(child: CircularProgressIndicator())
+                : isUserLoggedIn
+                    ? CreditCardsPage()
+                    : WelcomePage());
       },
     );
   }

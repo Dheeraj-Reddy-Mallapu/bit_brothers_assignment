@@ -1,10 +1,13 @@
 import 'package:bitbrothers_assignment/data/apis/get_all_cards_api.dart';
 import 'package:bitbrothers_assignment/data/objects/card_object.dart';
+import 'package:bitbrothers_assignment/data/shared_preferences.dart';
 import 'package:bitbrothers_assignment/screens/add_card_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:get/get.dart';
+
+import 'welcome_page.dart';
 
 class CreditCardsPage extends StatefulWidget {
   @override
@@ -14,7 +17,8 @@ class CreditCardsPage extends StatefulWidget {
 class _CreditCardsPageState extends State<CreditCardsPage> {
   bool isLoading = true;
   fetchData() async {
-    await CardApiService().fetchListings();
+    await SharedPrefs().getToken();
+    await CardApiService().fetchCards();
     isLoading = false;
     setState(() {});
   }
@@ -69,7 +73,7 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
                         )),
               _buildAddCardButton(
                 icon: Icon(Icons.add),
-                color: Color(0xFF081603),
+                // color: Color(0xFF081603),
               )
             ],
           ),
@@ -79,24 +83,35 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
   }
 
   // Build the title section
-  Column _buildTitleSection({@required title, @required subTitle}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0, top: 16.0),
-          child: Text(
-            '$title',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          ),
+  _buildTitleSection({@required title, @required subTitle}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+              child: Text(
+                '$title',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, bottom: 16.0),
+              child: Text(
+                '$subTitle',
+                style: TextStyle(fontSize: 21, color: Colors.blueGrey),
+              ),
+            )
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0, bottom: 16.0),
-          child: Text(
-            '$subTitle',
-            style: TextStyle(fontSize: 21, color: Colors.blueGrey),
-          ),
-        )
+        TextButton(
+            onPressed: () {
+              SharedPrefs().saveToken('');
+              Get.offAll(() => WelcomePage());
+            },
+            child: Text('Logout'))
       ],
     );
   }
@@ -186,7 +201,7 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
 // Build the FloatingActionButton
   Container _buildAddCardButton({
     required Icon icon,
-    required Color color,
+    // required Color color,
   }) {
     return Container(
       margin: const EdgeInsets.only(top: 24.0),
@@ -194,10 +209,9 @@ class _CreditCardsPageState extends State<CreditCardsPage> {
       child: FloatingActionButton(
         elevation: 2.0,
         onPressed: () {
-          Get.dialog(AddCardPage());
-          setState(() {});
+          Get.to(() => AddCardPage());
         },
-        backgroundColor: color,
+        // backgroundColor: color,
         mini: false,
         child: icon,
       ),

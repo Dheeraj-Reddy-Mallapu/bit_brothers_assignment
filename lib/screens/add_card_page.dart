@@ -1,4 +1,6 @@
+import 'package:bitbrothers_assignment/data/apis/create_card_api.dart';
 import 'package:bitbrothers_assignment/data/objects/card_object.dart';
+import 'package:bitbrothers_assignment/screens/credit_cards_page.dart';
 import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,7 +65,13 @@ class _AddCardPageState extends State<AddCardPage> {
                       category: categoryC.text,
                     );
 
-                    Get.back();
+                    String status = await CreateCardApiService().create(card);
+                    if (status == 'success') {
+                      Get.snackbar('Hurray!', 'Your card has successfully saved');
+                      Get.offAll(() => CreditCardsPage());
+                    } else if (status == 'fail') {
+                      Get.snackbar('Oops!', 'Something went wrong!');
+                    }
                   }
                 },
                 child: Text('Add Card'),

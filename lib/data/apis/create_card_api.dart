@@ -1,41 +1,32 @@
 import 'dart:convert';
-
 import 'package:bitbrothers_assignment/data/objects/card_object.dart';
 import 'package:bitbrothers_assignment/data/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class CardApiService {
+class CreateCardApiService {
   static const String baseUrl = 'https://interview-api.onrender.com/v1/cards';
 
-  fetchCards() async {
+  create(MyCard card) async {
     final Uri uri = Uri.parse(baseUrl);
     final String token = await SharedPrefs().getToken();
 
-    print("token: $token");
-
-    final response = await http.get(
+    final response = await http.post(
       uri,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
+      body: json.encode(card.toJson()),
     );
 
     // print(response.statusCode);
+    // print(response.body);
 
-    if (response.statusCode == 200) {
-      // print(response.body);
-      Map responseBody = json.decode(response.body);
-      List<dynamic> results = responseBody['results'];
-
-      cards.clear();
-
-      for (final result in results) {
-        MyCard card = MyCard.fromJson(result);
-        cards.add(card);
-      }
+    if (response.statusCode == 201) {
+      cards.add(card);
+      return 'success';
     } else {
-      throw Exception('Failed to load');
+      return 'fail';
     }
   }
 }
