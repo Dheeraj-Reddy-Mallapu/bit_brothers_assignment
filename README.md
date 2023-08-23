@@ -1,6 +1,8 @@
-# Flutter BitBrothers Assignment 💳 - By Dheeraj Reddy Mallapu
+# Flutter BitBrothers Assignment 💳
 
-## Dependencies uses:
+- by Dheeraj Reddy Mallapu
+
+## Dependencies used:
 
 1. http: for API calls
 2. shared_preferences: to keep user logged in
@@ -9,7 +11,7 @@
 5. get: to simplify page routing code
 6. dynamic_color: to dynamically switch between light mode and dark mode
 
-# Getting Started ✔️
+## Getting Started ✔️
 
 1. You should have a stable version of Flutter installed on your machine
 2. Clone the repository
